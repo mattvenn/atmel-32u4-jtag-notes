@@ -45,7 +45,11 @@ the final debugging.
 
 edit ./hardware/keyboardio/avr/libraries/Kaleidoscope-Plugin/tools//kaleidoscope-builder, add -ggdb3 to list of compiler options
 
-flash:
+new version of builder doesn't include prefs line, add something like this:
+
+    -prefs "compiler.cpp.extra_flags=${ARDUINO_CFLAGS} ${LOCAL_CFLAGS} -ggdb3" \
+
+Then flash it
 
     avrdude -c dragon_jtag -P usb -p atmega32u4 -v -U flash:w:./output/Model01-Firmware/Model01-Firmware-latest.hex
 
@@ -69,6 +73,10 @@ This was causing issues after a while
 with 'set history save', can search back through history to do the connecting
 
 then proceed as normal with gdb commands.
+
+## add a breakpoint
+
+    b /home/matt/work/shortcut/raise-v3/firmwares/Kaleidoscope-test/hardware/keyboardio/avr/libraries/KeyboardioScanner/KeyboardioScanner.cpp:173
 
 ## bugs
 
